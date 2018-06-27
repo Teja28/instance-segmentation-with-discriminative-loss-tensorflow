@@ -86,6 +86,9 @@ def process_image(image):
     ind = np.where(instance_mask==bg_color)
     instance_mask[ind] = 0.
     print("type of np.squeeze(image): ", type(np.squeeze(image)))
+    print("type of instance_mask before conversion: ", type(instance_mask))
+    instance_mask = np.asarray(instance_mask)
+    print("type of instance_mask after conversion: ", type(instance_mask))
     instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
     instance_mask = cv2.resize(instance_mask, (1280,720))
     output_image = cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR)
