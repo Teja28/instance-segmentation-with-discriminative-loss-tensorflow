@@ -57,7 +57,7 @@ def process_image(image):
     image = resize(image, (512,512))*255
     print("after resize image.shape: ", image.shape)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = np.expand_dims(image, axis=0)
+    #image = np.expand_dims(image, axis=0)
 
     #tic = time.time()
     prediction = sess.run(logits, feed_dict={input_image: image})
