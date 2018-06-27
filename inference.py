@@ -89,7 +89,7 @@ if __name__=='__main__':
         for i, path in enumerate(image_paths):
 
             image = cv2.resize(cv2.imread(path), image_shape, interpolation=cv2.INTER_LINEAR)
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             image = np.expand_dims(image, axis=0)
 
             tic = time.time()
@@ -118,6 +118,7 @@ if __name__=='__main__':
                     bg_color = color
             ind = np.where(instance_mask==bg_color)
             instance_mask[ind] = 0.
+            print("type of np.squeeze(image): ", type(np.squeeze(image)))
             instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
             instance_mask = cv2.resize(instance_mask, (1280,720))
             clust_time = time.time()-tic
