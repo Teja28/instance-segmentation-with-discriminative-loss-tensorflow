@@ -54,8 +54,10 @@ def save_image_with_features_as_color(pred):
 
 def process_image(image):
     print("before resize image.shape: ", image.shape)
+    print("image[0]: ",image[0])
     image = resize(image, (512,512))*255
     print("after resize image.shape: ", image.shape)
+    print("image[0]: ",image[0])
     #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = np.expand_dims(image, axis=0)
 
