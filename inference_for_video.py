@@ -11,6 +11,8 @@ slim = tf.contrib.slim
 from enet import ENet, ENet_arg_scope
 from clustering import cluster, get_instance_masks, save_instance_masks
 import time
+from moviepy.editor import VideoFileClip
+from IPython.display import HTML
 
 
 def rebuild_graph(sess, checkpoint_dir, input_image, batch_size, feature_dim):
@@ -69,7 +71,7 @@ def process_image(image):
     instance_mask = get_instance_masks(pred_cluster, bandwidth=1.)[0]
     #save_instance_masks(prediction, output_dir, bandwidth=1., count=i)
     #print(instance_mask.shape)
-    output_file_name = os.path.join(output_dir, 'cluster_{}.png'.format(str(i).zfill(4)))
+    #output_file_name = os.path.join(output_dir, 'cluster_{}.png'.format(str(i).zfill(4)))
     colors, counts = np.unique(instance_mask.reshape(image_shape[0]*image_shape[1],3),
                                     return_counts=True, axis=0)
     max_count = 0
@@ -81,9 +83,11 @@ def process_image(image):
     instance_mask[ind] = 0.
     instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
     instance_mask = cv2.resize(instance_mask, (1280,720))
+    output_image = cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR)
+    return output_image
     #clust_time = time.time()-tic
     #cluster_time += clust_time
-    cv2.imwrite(output_file_name, cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR))
+    #cv2.imwrite(output_file_name, cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR))
 
 
 if __name__=='__main__':
@@ -125,7 +129,11 @@ if __name__=='__main__':
         for i, path in enumerate(image_paths):
 
             image = cv2.resize(cv2.imread(path), image_shape, interpolation=cv2.INTER_LINEAR)
-            process_image(image)
+            #process_image(image)
+            project_output = 'harder_challenge_video_output.mp4'
+            clip1 = VideoFileClip("harder_challenge_video.mp4");
+            white_clip = clip1.fl_image(process_image)
+            white_clip.write_videofile(project_output, audio = False);
             """
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             image = np.expand_dims(image, axis=0)
