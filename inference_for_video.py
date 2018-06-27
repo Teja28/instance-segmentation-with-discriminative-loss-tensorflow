@@ -144,11 +144,13 @@ if __name__=='__main__':
         for i, path in enumerate(image_paths):
 
             image = cv2.resize(cv2.imread(path), image_shape, interpolation=cv2.INTER_LINEAR)
-            #process_image(image)
+            print(process_image(image))
+            """
             project_output = 'harder_challenge_video_output.mp4'
             clip1 = VideoFileClip("harder_challenge_video.mp4");
             white_clip = clip1.fl_image(process_image)
             white_clip.write_videofile(project_output, audio = False);
+            """
             """
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             image = np.expand_dims(image, axis=0)
