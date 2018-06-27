@@ -95,7 +95,7 @@ def process_image(image):
     #instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
     instance_mask = cv2.resize(instance_mask, (1280,720))
     #output_image = cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR)
-    return output_image
+    return instance_mask
     #clust_time = time.time()-tic
     #cluster_time += clust_time
     #cv2.imwrite(output_file_name, cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR))
