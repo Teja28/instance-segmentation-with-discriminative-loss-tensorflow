@@ -86,9 +86,9 @@ if __name__=='__main__':
 
         inference_time = 0
         cluster_time = 0
-        for i, path in enumerate(image_paths):
-
-            image = cv2.resize(cv2.imread(path), image_shape, interpolation=cv2.INTER_LINEAR)
+        for i in range(1190):
+            image = cv2.resize(cv2.imread("harder_challenge_video_frames/" + str(i+100) + ".jpg"), image_shape, interpolation=cv2.INTER_LINEAR)
+            #image = cv2.resize(cv2.imread(path), image_shape, interpolation=cv2.INTER_LINEAR)
             #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             image = np.expand_dims(image, axis=0)
 
@@ -120,8 +120,7 @@ if __name__=='__main__':
             instance_mask[ind] = 0.
             print("type of np.squeeze(image): ", type(np.squeeze(image)))
             print("type of instance_mask: ", type(instance_mask))
-            instance_mask = 0.7 * np.squeeze(image) + 0.3 * instance_mask
-            #instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
+            instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
             instance_mask = cv2.resize(instance_mask, (1280,720))
             clust_time = time.time()-tic
             cluster_time += clust_time
