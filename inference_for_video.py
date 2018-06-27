@@ -6,7 +6,7 @@ from glob import glob
 import numpy as np
 import cv2
 import tensorflow as tf
-
+from skimage.transform import resize
 slim = tf.contrib.slim
 from enet import ENet, ENet_arg_scope
 from clustering import cluster, get_instance_masks, save_instance_masks
@@ -124,7 +124,9 @@ if __name__=='__main__':
         cluster_time = 0
         for i, path in enumerate(image_paths):
 
-            image = cv2.resize(cv2.imread(path), image_shape, interpolation=cv2.INTER_LINEAR)
+            image = cv2.resize(cv2.imread("harder_challenge_video_frames" + str(i) + ".jpg"), image_shape, interpolation=cv2.INTER_LINEAR)
+            image = resize(image, (512,512))*255
+            image = image.astype(int)
             process_image(image)
             """
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
