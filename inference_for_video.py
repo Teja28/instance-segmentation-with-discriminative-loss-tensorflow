@@ -6,6 +6,7 @@ from glob import glob
 import numpy as np
 import cv2
 import tensorflow as tf
+from skimage.transform import resize
 
 slim = tf.contrib.slim
 from enet import ENet, ENet_arg_scope
@@ -52,6 +53,7 @@ def save_image_with_features_as_color(pred):
     cv2.imwrite(output_file_name, np.squeeze(pred))
 
 def process_image(image):
+    image = resize(image, (512,512))*255
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = np.expand_dims(image, axis=0)
 
