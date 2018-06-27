@@ -124,7 +124,7 @@ if __name__=='__main__':
         cluster_time = 0
         for i, path in enumerate(image_paths):
 
-            image = cv2.resize(cv2.imread("harder_challenge_video_frames" + str(i) + ".jpg"), image_shape, interpolation=cv2.INTER_LINEAR)
+            image = cv2.resize(cv2.imread("harder_challenge_video_frames/" + str(i) + ".jpg"), image_shape, interpolation=cv2.INTER_LINEAR)
             image = resize(image, (512,512))*255
             image = image.astype(int)
             process_image(image)
