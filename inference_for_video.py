@@ -50,7 +50,7 @@ def save_image_with_features_as_color(pred):
     cv2.imwrite(output_file_name, np.squeeze(pred))
 
 def process_image(image):
-    #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = cv2.cvtColor(image, cv2.COLOR_RGBBGR)
     image = np.expand_dims(image, axis=0)
 
     #tic = time.time()
