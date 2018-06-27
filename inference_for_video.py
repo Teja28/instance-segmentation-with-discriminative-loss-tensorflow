@@ -50,7 +50,7 @@ def save_image_with_features_as_color(pred):
     cv2.imwrite(output_file_name, np.squeeze(pred))
 
 def process_image(image):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = np.expand_dims(image, axis=0)
 
     #tic = time.time()
@@ -83,7 +83,7 @@ def process_image(image):
     instance_mask = cv2.resize(instance_mask, (1280,720))
     #clust_time = time.time()-tic
     #cluster_time += clust_time
-    cv2.imwrite(output_file_name, cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR))
+    cv2.imwrite(output_file_name, instance_mask)
 
 
 if __name__=='__main__':
