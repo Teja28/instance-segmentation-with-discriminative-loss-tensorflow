@@ -92,6 +92,7 @@ def process_image(image):
     print("shape of np.squeeze(image): ", np.squeeze(image).shape)
     print("shape of instance_mask: ", instance_mask.shape)
     #instance_mask = 0.7 * np.squeeze(image) + 0.3 * instance_mask
+    print("instance_mask[0]: ", instance_mask[0])
     instance_mask = cv2.cvtColor(instance_mask, cv2.COLOR_RGB2BGR)
     instance_mask = cv2.addWeighted(np.squeeze(image), 1, instance_mask, 0.3, 0)
     instance_mask = cv2.resize(instance_mask, (1280,720))
