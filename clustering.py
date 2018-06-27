@@ -4,7 +4,7 @@ from sklearn.cluster import MeanShift, estimate_bandwidth
 import time
 import cv2
 
-COLOR=[np.array([255,0,0]), 
+COLOR=[np.array([255,0,0]),
 	   np.array([0,255,0]),
 	   np.array([0,0,255]),
 	   np.array([125,125,0]),
@@ -21,7 +21,7 @@ def cluster(prediction, bandwidth):
 	print ('time for clustering', time.time() - tic)
 	labels = ms.labels_
 	cluster_centers = ms.cluster_centers_
-	
+
 	num_clusters = cluster_centers.shape[0]
 
 	return num_clusters, labels, cluster_centers
